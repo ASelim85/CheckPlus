@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MyTestSuite">
+    <listeners>
+        <listener class-name="Utility.MyListener"/>
+    </listeners>
+    <test name="Test1">
+        <classes>
+            <class name="Tests.LoginTests">
+            <methods>
+<!--                <include name="loginWithValidCredentials"/>-->
+            </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test2">
+        <classes>
+<!--            <class name="Tests.CashInTests"/>-->
+<!--            <class name="Tests.SubmitNewKYCTests"/>-->
+<!--            <class name="Tests.WalletProcessTests"/>-->
+<!--            <class name="Tests.CashOutTests"/>-->
+        </classes>
+    </test>
+</suite>
