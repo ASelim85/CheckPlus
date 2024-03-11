@@ -15,9 +15,6 @@ public class UnitsElements extends BasePage {
     public By secDescription = By.id(("DescriptionAr"));
     public By email = By.id(("Email"));
     public By submitButton = By.xpath(("//label[@type='submit']"));
-    public By Status = By.xpath(setXpathByDataID("status-input"));
-    public By SubmittedStatus = By.xpath(setXpathByDataID("KYCStatus_SUBMITTED"));
-    public By InProgressStatus = By.xpath(setXpathByDataID("KYCStatus_IN_PROGRESS"));
     public By CreatedStatus = By.xpath(setXpathByDataID("KYCStatus_CREATED"));
     public By FailedStatus = By.xpath(setXpathByDataID("KYCStatus_FAILED"));
     public By DeletedStatus = By.xpath(setXpathByDataID("KYCStatus_DELETED"));

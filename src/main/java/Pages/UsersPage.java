@@ -8,6 +8,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
+
+import static Data.GenerateNames.generateArabicName;
+
 public class UsersPage extends UsersElements {
 
 
@@ -26,7 +30,7 @@ public class UsersPage extends UsersElements {
 	}
 
 	public UsersPage setFullName() {
-		setText(fullName, STR."\{generateArabicFirstName()} \{generateArabicLastName()}");
+		setText(fullName, STR."\{generateArabicName()} \{generateArabicLastName()}");
 		return this;
 	}
 
@@ -88,7 +92,7 @@ public class UsersPage extends UsersElements {
 		return getContent(fullName);
 	}
 
-	public UsersPage assertMYSMETittle() throws InterruptedException {
+	public UsersPage assertMYSMETittle() throws InterruptedException, IOException {
 		softAssertionEqual(fullName, "My SMEs");
 		return this;
 	}

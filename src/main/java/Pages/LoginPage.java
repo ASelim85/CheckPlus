@@ -2,8 +2,10 @@ package Pages;
 
 import Elements.LoginElements;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 
-import static CoreElements.Click.click1;
+import java.io.IOException;
+
 
 public class LoginPage extends LoginElements {
 
@@ -25,7 +27,8 @@ public class LoginPage extends LoginElements {
 
     @Step("clicks login button")
     public LoginPage clickSignIn() {
-        click1(signInButton);
+//        signInButton.click();
+        click(signInButton);
         return this;
     }
 
@@ -55,19 +58,19 @@ public class LoginPage extends LoginElements {
     }
 
     @Step("assert invalid login message")
-    public LoginPage assertInvalidLoginError() {
+    public LoginPage assertInvalidLoginError() throws IOException {
         softAssertionEqual(signInErrorMessage, "Invalid Login");
         return this;
     }
 
     @Step("assert empty password error")
-    public LoginPage assertEmptyPasswordError() {
+    public LoginPage assertEmptyPasswordError() throws IOException {
         softAssertionEqual(emptyPasswordErrorLabel, "A password is required");
         return this;
     }
 
     @Step("assert page title")
-    public LoginPage assertPageTitle() {
+    public LoginPage assertPageTitle() throws IOException {
         softAssertionEqual(welcomeToPortalPageTitle, "Welcome to our portal");
         return this;
     }

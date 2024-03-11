@@ -61,80 +61,8 @@ public class WorkFlowPage extends WorkFlowElements {
 		selectData(assignedTeam, 1);
 		return this;
 	}
-
-	public WorkFlowPage setOTP1(String otp) {
-		setText(txtOTP1, otp);
-		return this;
-	}
-
-	public WorkFlowPage setOTP2(String otp) {
-		setText(txtOTP2, otp);
-		return this;
-	}
-
-	public WorkFlowPage setOTP3(String otp) {
-		setText(txtOTP3, otp);
-		return this;
-	}
-
-	public WorkFlowPage setOTP4(String otp) {
-		setText(txtOTP4, otp);
-		return this;
-	}
-
-	public WorkFlowPage setOTP5(String otp) {
-		setText(txtOTP5, otp);
-		return this;
-	}
-
-	public WorkFlowPage clickOK() {
-		click(btnOK);
-		return this;
-	}
-
-
-	public WorkFlowPage setMobileNumber(String mobileNumber) throws InterruptedException {
-		setText(unitsList, "01111353830");
-		return this;
-	}
-
-	public WorkFlowPage setName() {
-		setText(assignedRole, "pay");
-		return this;
-	}
-
-	public WorkFlowPage selectGovernorate() {
-		WebElement governorate = driver.findElement(By.id("governorate"));
-		governorate.click();
-		By governValues = By.xpath(setXpathByDataID("Governorate_CAIRO"));
-		click(governValues);
-		return this;
-	}
-
-	public WorkFlowPage selectCity() {
-		WebElement city = driver.findElement(By.id("city"));
-		city.click();
-		By cityValues = By.xpath(setXpathByDataID("City_15_MAYO"));
-		click(cityValues);
-		return this;
-	}
-
-	public String getReturnedSMEsTitle() {
-		return getContent(returnedSMEsTitle);
-	}
-
-	public WorkFlowPage clickShowResultBtn() {
-		click(showResultBtn);
-		return this;
-	}
-
-	public WorkFlowPage clickExportFileBtn() {
-		click(exportListBtn);
-		return this;
-	}
-
-	public WorkFlowPage assertReturnedPage() {
-		softAssertionEqual(returnedSMEsTitle, "Returned SMEs");
+	public WorkFlowPage clickCancelBtn() {
+		click(cancelButton);
 		return this;
 	}
 }

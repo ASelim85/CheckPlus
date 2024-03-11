@@ -19,26 +19,13 @@ import java.util.ArrayList;
 public class BaseTest extends WebDriverEventHandler {
     public WebDriver driver;
     public final SoftAssert softAssert = new SoftAssert();
-    LoginPage loginPage = new LoginPage();
-    DashboardPage dashboardPage;
+    LoginPage loginPage;
     LoginTests loginTest;
-    WalletProcessPage walletProcessPage;
-    TestCreateKYCPage testCreateKYCPage;
-    KYCDocumentPage kYCDocumentPage;
-    MyDocumentsPage myDocumentsPage;
-    CashOutPage cashOutPage;
-    CashInPage cashInPage;
     UnitsPage unitsPage;
     UsersTests usersTests;
-    MyTransactionsPage myTransactionsPage;
-    CreateSMEPage createSMEPage;
-    MyDocumentsTestCases myDocumentsTestCases;
+    WorkFlowPage workFlowPage;
     UsersPage usersPage;
-    CreateKYCTests createKYCTests;
-    SubmitNewKYCPage submitNewKYCPage;
-    WorkFlowPage returnedSMEPage;
-    MySMEDetailsPage mySMEDetailsPage;
-
+    UnitsTests unitsTests;
     @BeforeSuite
     void setEnvironment() {
     }
@@ -51,29 +38,16 @@ public class BaseTest extends WebDriverEventHandler {
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         String url = "http://youxeldev.eastus.cloudapp.azure.com/Check/Portal/Account/Login";
-//        String url = "https://agentstg.axispay.app";
         driver.navigate().to(url);
         loginPage = new LoginPage();
         loginTest = new LoginTests();
         usersTests = new UsersTests();
-        dashboardPage = new DashboardPage(driver);
-        walletProcessPage = new WalletProcessPage(driver);
-        kYCDocumentPage = new KYCDocumentPage(driver);
-        myDocumentsPage = new MyDocumentsPage(driver);
-        myDocumentsTestCases = new MyDocumentsTestCases();
-        cashOutPage = new CashOutPage(driver);
-        cashInPage = new CashInPage(driver);
         unitsPage = new UnitsPage(driver);
-        myTransactionsPage = new MyTransactionsPage(driver);
-        createSMEPage = new CreateSMEPage(driver);
+        workFlowPage = new WorkFlowPage(driver);
         usersPage = new UsersPage(driver);
-        testCreateKYCPage = new TestCreateKYCPage(driver);
-        createKYCTests = new CreateKYCTests();
-        submitNewKYCPage = new SubmitNewKYCPage(driver);
-        returnedSMEPage = new WorkFlowPage(driver);
-        mySMEDetailsPage = new MySMEDetailsPage(driver);
+        unitsTests = new UnitsTests();
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 

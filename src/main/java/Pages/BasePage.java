@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -30,37 +31,8 @@ public class BasePage {
         BasePage.driver = driver;
     }
 
-    public static String getCurrentDate() {
-        return new SimpleDateFormat("dd-MM-yyyy hh.mm.ss a").format(new Date());
-    }
-
-    public static String getDateFormat(String format) {
-        return new SimpleDateFormat(format).format(new Date());
-    }
-
-    public static String getCurrentDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy | hh:mm a");
-        Date date = new Date();
-        System.out.println("Current Date : " + dateFormat.format(date));
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.SECOND, -15);
-        Date currentDatePlusOne = c.getTime();
-        return String.valueOf(dateFormat.format(currentDatePlusOne)
-                .toLowerCase());
-    }
-
-    @SneakyThrows
-    public WebElement find(By locator) {
-        waitElement(locator);
-        scrollElement(locator);
-        highlightElement(locator);
-//        Thread.sleep(100);
-        return driver.findElement(locator);
-    }
-
     public void waitElement(By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -72,6 +44,15 @@ public class BasePage {
     public void waitWebElement(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+
+    @SneakyThrows
+    public WebElement find(By locator) {
+        waitElement(locator);
+        scrollElement(locator);
+        highlightElement(locator);
+        return driver.findElement(locator);
     }
 
     @SneakyThrows
@@ -92,7 +73,6 @@ public class BasePage {
         waitElement(locator);
         find(locator).click();
         try {
-//            Thread.sleep(200);
             TakesScreenshot screenshot = (TakesScreenshot) driver;
             File src = screenshot.getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(src, new File(
@@ -228,7 +208,7 @@ public class BasePage {
     }
 
     @SneakyThrows
-    public void softAssertionEqual(By locator, String expected) {
+    public void softAssertionEqual(By locator, String expected) throws IOException {
         waitElement(locator);
         softAssert.assertEquals(getContent(locator), expected);
         if (getContent(locator).equals(expected)) {
@@ -247,7 +227,7 @@ public class BasePage {
 
 
     @SneakyThrows
-    public void softAssertionEqual1(By locator, String expected) {
+    public void softAssertionEqual1(By locator, String expected) throws IOException {
         waitElement(locator);
         softAssert.assertEquals(getContent(locator), expected);
         if (getContent(locator).equals(expected)) {
@@ -763,5 +743,24 @@ public class BasePage {
                 "الإدارة العامة لتنمية الاستثمارات"};
         Random random = new Random();
         return jobName[random.nextInt(jobName.length)];
+    }
+    public static String getCurrentDate() {
+        return new SimpleDateFormat("dd-MM-yyyy hh.mm.ss a").format(new Date());
+    }
+
+    public static String getDateFormat(String format) {
+        return new SimpleDateFormat(format).format(new Date());
+    }
+
+    public static String getCurrentDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy | hh:mm a");
+        Date date = new Date();
+        System.out.println("Current Date : " + dateFormat.format(date));
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.SECOND, -15);
+        Date currentDatePlusOne = c.getTime();
+        return String.valueOf(dateFormat.format(currentDatePlusOne)
+                .toLowerCase());
     }
 }

@@ -2,15 +2,12 @@ package Tests;
 
 import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.io.IOException;
-
 public class WorkFlowTests extends BaseTest {
 
     @Test(priority = 0, enabled = true)
     public void addNewWorkFlow() throws InterruptedException {
         loginTest.loginWithValidCredentials();
-        returnedSMEPage.clickWorkFlow()
+        workFlowPage.clickWorkFlow()
                 .clickAddNewWorkFlow()
                 .setPrimaryName()
                 .setSecondaryName()
@@ -22,45 +19,73 @@ public class WorkFlowTests extends BaseTest {
                 .clickSubmitBtn();
     }
 
+
+    // create a new work flow with different data
     @Test(priority = 1, enabled = true)
-    public void filterWithName() {
+    public void addNewWorkFlow2() throws InterruptedException {
         loginTest.loginWithValidCredentials();
-        returnedSMEPage.clickWorkFlow()
-                .assertReturnedPage()
-                .setName()
-                .clickShowResultBtn()
-                .clickExportFileBtn();
+        workFlowPage.clickWorkFlow()
+                .clickAddNewWorkFlow()
+                .setPrimaryName()
+                .setSecondaryName()
+                .selectUnit()
+                .selectRole()
+                .selectAssignedUnit()
+                .selectAssignedTo()
+                .selectAssignedTeam()
+                .clickSubmitBtn();
     }
 
+    // create a new work flow without selecting a unit
     @Test(priority = 2, enabled = true)
-    public void filterWithGovernorate() throws InterruptedException, IOException, AWTException {
+    public void addNewWorkFlow3() throws InterruptedException {
         loginTest.loginWithValidCredentials();
-        returnedSMEPage.clickWorkFlow()
-                .assertReturnedPage();
-        createSMEPage.uploadNationalIdAttachment()
-                .uploadContractAttachment()
-                .uploadCommercialRegistrationAttachment()
-                .uploadTaxIdAttachment();
-        returnedSMEPage.clickSubmitBtn()
+        workFlowPage.clickWorkFlow()
+                .clickAddNewWorkFlow()
+                .setPrimaryName()
+                .setSecondaryName()
                 .selectRole()
-                .setOTP1("4")
-                .setOTP2("5")
-                .setOTP3("3")
-                .setOTP4("4")
-                .setOTP5("5")
-                .clickOK();
+                .selectAssignedUnit()
+                .selectAssignedTo()
+                .selectAssignedTeam()
+                .clickSubmitBtn();
     }
+    // create new workflow without with only setting primary name
 
     @Test(priority = 3, enabled = true)
-    public void filterWithCity() {
+    public void addNewWorkFlow4() throws InterruptedException {
         loginTest.loginWithValidCredentials();
-        returnedSMEPage.clickWorkFlow()
-                .assertReturnedPage()
-                .selectCity()
-                .clickShowResultBtn()
-                .clickExportFileBtn();
-
+        workFlowPage.clickWorkFlow()
+                .clickAddNewWorkFlow()
+                .setPrimaryName()
+                .clickSubmitBtn();
     }
+
+    // create new workflow with but cancel the process
+    @Test(priority = 4, enabled = true)
+    public void addNewWorkFlow5() throws InterruptedException {
+        loginTest.loginWithValidCredentials();
+        workFlowPage.clickWorkFlow()
+                .clickAddNewWorkFlow()
+                .setPrimaryName()
+                .setSecondaryName()
+                .selectUnit()
+                .selectRole()
+                .selectAssignedUnit()
+                .selectAssignedTo()
+                .selectAssignedTeam()
+                .clickCancelBtn();
+    }
+
+// call the method addNewUser from UsersPage and call addNewUnit from UnitsTests
+    @Test(priority = 5, enabled = true)
+    public void addNewUserAndUnit() throws InterruptedException {
+        usersTests.addNewUser();
+        unitsTests.addNewUnit();
+    }
+
 }
+
+
 
 

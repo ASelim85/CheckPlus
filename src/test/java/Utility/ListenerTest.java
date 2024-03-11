@@ -12,6 +12,7 @@ import org.testng.ITestResult;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 
 import static Pages.BasePage.driver;
 import static Pages.BasePage.getCurrentDate;
@@ -39,7 +40,7 @@ public class ListenerTest implements ITestListener {
             } catch (Exception ignored) {
             }
         }
-        driver.quit();
+//        driver.quit();
     }
 
     @Override
@@ -56,7 +57,7 @@ public class ListenerTest implements ITestListener {
             } catch (Exception ignored) {
             }
         }
-		driver.quit();
+//		driver.quit();
     }
 
     @Override
@@ -72,25 +73,53 @@ public class ListenerTest implements ITestListener {
             } catch (Exception ignored) {
             }
         }
-		driver.quit();
+//		driver.quit();
     }
 
     @SneakyThrows
     @Override
     public void onStart(ITestContext context) {
         ScreenshotFailedCases.deleteScreenShots();
-        Runtime.getRuntime().exec("cmd /c allure generate --clean --output .\\allure-results");
-        Runtime.getRuntime().exec("cmd /c allure generate --clean --output D:\\Web_Automation\\AgentPortal\\TestData\\allureReport");
+        try {
+            Runtime.getRuntime().exec("cmd /c allure generate --clean --output .\\allure-results");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            Runtime.getRuntime().exec("cmd /c allure generate --clean --output D:\\Web_Automation\\AgentPortal\\TestData\\allureReport");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @SneakyThrows
     @Override
     public void onFinish(ITestContext result) {
-        Runtime.getRuntime().exec("cmd /c allure serve .\\allure-results");
-        Runtime.getRuntime().exec("cmd /c allure-combine D:\\Web_Automation\\AgentPortal\\allure-results --dest D:\\Web_Automation\\AgentPortal\\TestData\\allureReport --auto-create-folders");
-        Runtime.getRuntime().exec("cmd /c allure-combine D:\\Web_Automation\\AgentPortal\\TestData\\allureReport --remove-temp-files");
-        Runtime.getRuntime().exec("cmd /c allure-combine D:\\Web_Automation\\AgentPortal\\TestData\\allureReport --ignore-utf8-errors");
-        Thread.sleep(5000);
+        try {
+            Runtime.getRuntime().exec("cmd /c allure serve .\\allure-results");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            Runtime.getRuntime().exec("cmd /c allure-combine D:\\Web_Automation\\AgentPortal\\allure-results --dest D:\\Web_Automation\\AgentPortal\\TestData\\allureReport --auto-create-folders");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            Runtime.getRuntime().exec("cmd /c allure-combine D:\\Web_Automation\\AgentPortal\\TestData\\allureReport --remove-temp-files");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            Runtime.getRuntime().exec("cmd /c allure-combine D:\\Web_Automation\\AgentPortal\\TestData\\allureReport --ignore-utf8-errors");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 //        sendPDFReportByGMail("mail.test.env@gmail.com", "xwbpeiycbnaqyflt", "aselim@axisapp.com","Testing Report" + getCurrentDate(), "");
 //        sendReportByEMail("mail.test.env@gmail.com", "xwbpeiycbnaqyflt", "aselim@axisapp.com","Testing Report" + getCurrentDate(), "");
 

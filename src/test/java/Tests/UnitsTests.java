@@ -9,7 +9,7 @@ public class UnitsTests extends BaseTest {
     UsersTests usersTests = new UsersTests();
 
     @Test(priority = 0, enabled = true)
-    public void OpenBranchDocument() throws InterruptedException {
+    public void addNewUnit() throws InterruptedException {
         usersTests.addNewUser();
 //        loginTests.loginWithValidCredentials();
         unitsPage.clickUnits()
@@ -22,7 +22,6 @@ public class UnitsTests extends BaseTest {
                 .setPriDescription()
                 .setSecDescription()
                 .setEmail()
-                .clickSave();
-//        Assert.assertEquals(branchOperationsPage.CompletedText(), "Completed");
+                .clickSave();//        Assert.assertEquals(branchOperationsPage.CompletedText(), "Completed");
     }
 }

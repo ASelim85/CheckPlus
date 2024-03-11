@@ -5,11 +5,14 @@ import io.qameta.allure.*;
 import lombok.SneakyThrows;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+//import CoreElements.*;
+import java.io.IOException;
 
 import static Utility.JsonReader.TestJson.getJson;
 
 
 public class LoginTests extends BaseTest {
+//    Driver driver = new Driver();
     LoginPage loginPage = new LoginPage();
     String Username = "agentuser3";//"agentuser3";
     String Password = "P@ssw0rd";
@@ -24,6 +27,7 @@ public class LoginTests extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     @Description("Test that verifies a user can sign in the page with valid username and password")
     public void loginWithValidCredentials() {
+        //validLogin
         loginPage.setUsername(getJson(loginTestData, "username"))
                 .setPassword(getJson(loginTestData, "password"))
                 .clickSignIn()
@@ -37,7 +41,7 @@ public class LoginTests extends BaseTest {
     @Owner("QC Team")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Test that verifies a user cannot enter the page without logging in")
-    public void loginWithInValidCredentials() {
+    public void loginWithInValidCredentials() throws IOException {
         loginPage.setUsername(getJson(loginTestData, "username"))
                 .setPassword(getJson(loginTestData, "wrong password"))
                 .clickSignIn()
@@ -52,7 +56,7 @@ public class LoginTests extends BaseTest {
     @Owner("QC Team")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Test that verifies a user cannot Login with empty password")
-    public void loginWithEmptyPassword() {
+    public void loginWithEmptyPassword() throws IOException {
         loginPage.setUsername(getJson(loginTestData, "username"))
                 .setPassword("")
                 .clickSignIn()
@@ -61,7 +65,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void tryAssert() {
+    public void tryAssert() throws IOException {
         loginPage.assertPageTitle()
                 .softAssertAll();
     }
